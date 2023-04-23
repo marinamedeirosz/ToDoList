@@ -1,11 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ImageBackground
-} from "react-native";
+import {StyleSheet, TouchableOpacity, View, ImageBackground} from "react-native";
 import interrogacao from "../assets/interrogacao.png";
 import lua from "../assets/lua.png";
 import sol from "../assets/sol.png";
