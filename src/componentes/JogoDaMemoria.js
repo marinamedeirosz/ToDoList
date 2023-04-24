@@ -1,19 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {StyleSheet, TouchableOpacity, View, ImageBackground} from "react-native";
-import interrogacao from "../assets/interrogacao.png";
-import lua from "../assets/lua.png";
-import sol from "../assets/sol.png";
-import venus from "../assets/venus.png";
-import marte from "../assets/marte.png";
-import mercurio from "../assets/mercurio.png";
-import saturno from "../assets/saturno.png";
-import terra from "../assets/terra.png";
-import sapinho from "../assets/sapinho.png";
+import interrogacao from "../../assets/game_images/interrogacao.png";
+import lua from "../../assets/game_images/lua.png";
+import sol from "../../assets/game_images/sol.png";
+import venus from "../../assets/game_images/venus.png";
+import marte from "../../assets/game_images/marte.png";
+import mercurio from "../../assets/game_images/mercurio.png";
+import saturno from "../../assets/game_images/saturno.png";
+import terra from "../../assets/game_images/terra.png";
+import sapinho from "../../assets/game_images/sapinho.png";
 
 var cartas = [];
 
-export default function JogoDaMemoria() {
+export default function App() {
   const [board, setBoard] = useState([
     { status: 0, image: lua, id: 0 },
     { status: 0, image: venus, id: 1 },
@@ -46,7 +46,7 @@ export default function JogoDaMemoria() {
           if (cartas[0].image !== cartas[1].image) {
             cartas.forEach((carta) => {
               let newBoard = [...board];
-              console.log(carta.id);
+              //console.log(carta.id);
               newBoard[carta.id].status = 0;
               setTimeout(() => {
                 setBoard(newBoard);
@@ -68,15 +68,18 @@ export default function JogoDaMemoria() {
   return (
     <View style={styles.container}>
       {board.map((card, index) => (
-        <TouchableOpacity key={card.id} onPress={() => openCard(card, index)}>
-          <View style={styles.card}>
-            <ImageBackground
-              source={card.status === 0 ? interrogacao : card.image}
-              resizeMode="stretch"
-              style={styles.image}
-            ></ImageBackground>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.cartita}>
+          <TouchableOpacity key={card.id} onPress={() => openCard(card, index)}>
+            <View style={styles.card}>
+              <ImageBackground
+                source={card.status === 0 ? interrogacao : card.image}
+                resizeMode="stretch"
+                style={styles.image}
+                imageStyle={{ borderRadius: 10}}
+              ></ImageBackground>
+            </View>
+          </TouchableOpacity>
+        </View>
       ))}
     </View>
   );
@@ -87,19 +90,24 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-evenly",
+    height: '100vh',
+    width: '100vw',
   },
   card: {
     height: 100,
     width: 80,
-    borderRadius: 4,
     margin: 4
   },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center"
+  },
+  cartita:{
+    width: '21%',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
