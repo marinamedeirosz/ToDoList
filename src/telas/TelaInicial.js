@@ -12,7 +12,8 @@ export default function Tela1(props){
             <View style={styles.fundo}>
                 <Text style={styles.titulo}>{props.texto}</Text>
                 <View style={styles.botoesSimView}>
-                    <TouchableOpacity style={styles.botaoSim}>
+                    <TouchableOpacity style={styles.botaoSim} onPress={() => 
+                                                                navigation.navigate('Tela2')}>
                         <Text style={styles.textoBotaoSim}>SIM</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.botaoSim}>

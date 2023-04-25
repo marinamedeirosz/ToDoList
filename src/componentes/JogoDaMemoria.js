@@ -1,36 +1,41 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {StyleSheet, TouchableOpacity, View, ImageBackground} from "react-native";
 import interrogacao from "../../assets/game_images/interrogacao.png";
-import lua from "../../assets/game_images/lua.png";
-import sol from "../../assets/game_images/sol.png";
-import venus from "../../assets/game_images/venus.png";
-import marte from "../../assets/game_images/marte.png";
-import mercurio from "../../assets/game_images/mercurio.png";
-import saturno from "../../assets/game_images/saturno.png";
-import terra from "../../assets/game_images/terra.png";
-import sapinho from "../../assets/game_images/sapinho.png";
+import dedito from "../../assets/game_images/deditos.jpg";
+import allstar from "../../assets/game_images/allstar.png";
+import myl from "../../assets/game_images/mario-y-luigi.jpg";
+import coracion from "../../assets/game_images/coracaozito.jpg";
+import gf from "../../assets/game_images/i-love-my-gf.jpg";
+import kissy from "../../assets/game_images/kissy.jpg";
+import copa from "../../assets/game_images/brasil.jpg";
+import dicria from "../../assets/game_images/a-melhor.jpg";
+import gloss from "../../assets/game_images/sorreiei-fml.jpg";
+import bjbj from "../../assets/game_images/beijinho.jpg";
 
 var cartas = [];
 
-export default function App() {
+export default function App({navigation}) {
   const [board, setBoard] = useState([
-    { status: 0, image: lua, id: 0 },
-    { status: 0, image: venus, id: 1 },
-    { status: 0, image: sol, id: 2 },
-    { status: 0, image: mercurio, id: 3 },
-    { status: 0, image: sol, id: 4 },
-    { status: 0, image: saturno, id: 5 },
-    { status: 0, image: sapinho, id: 6 },
-    { status: 0, image: terra, id: 7 },
-    { status: 0, image: saturno, id: 8 },
-    { status: 0, image: venus, id: 9 },
-    { status: 0, image: mercurio, id: 10 },
-    { status: 0, image: lua, id: 11 },
-    { status: 0, image: marte, id: 12 },
-    { status: 0, image: sapinho, id: 13 },
-    { status: 0, image: marte, id: 14 },
-    { status: 0, image: terra, id: 15 }
+    { status: 0, image: dedito, id: 0 },
+    { status: 0, image: allstar, id: 1 },
+    { status: 0, image: myl, id: 2 },
+    { status: 0, image: gf, id: 3 },
+    { status: 0, image: myl, id: 4 },
+    { status: 0, image: kissy, id: 5 },
+    { status: 0, image: bjbj, id: 6 },
+    { status: 0, image: gloss, id: 7 },
+    { status: 0, image: kissy, id: 8 },
+    { status: 0, image: allstar, id: 9 },
+    { status: 0, image: gf, id: 10 },
+    { status: 0, image: dedito, id: 11 },
+    { status: 0, image: coracion, id: 12 },
+    { status: 0, image: dicria, id: 13 },
+    { status: 0, image: gloss, id: 14 },
+    { status: 0, image: copa, id: 15 },
+    { status: 0, image: bjbj, id: 12 },
+    { status: 0, image: dicria, id: 13 },
+    { status: 0, image: coracion, id: 14 },
+    { status: 0, image: copa, id: 15 }
   ]);
 
   const openCard = (card, index) => {

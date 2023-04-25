@@ -3,6 +3,9 @@ import Tela2 from './src/telas/Tela2';
 import TelaCarregamento from './src/telas/TelaCarregamento';
 import TelaPrincipal from './src/telas/TelaPrincipal';
 import { useFonts } from 'expo-font';
+import TelaJogo from './src/telas/TelaJogo'
+import {NavigationContainer} from '@react-navigation/native';
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,10 +17,16 @@ export default function App() {
   }
 
   return (
-    //<Tela1/>
-    //<Tela2/>
-    //<TelaCarregamento/>
-    <TelaPrincipal/>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="T1" component={Tela1}/>
+        <Stack.Screen name="T2" component={Tela2}/>
+        <Stack.Screen name="Loading" component={TelaCarregamento}/>
+        <Stack.Screen name="Home" component={TelaPrincipal}/>
+        <Stack.Screen name="Game" component={TelaJogo}/>
+      </Stack.Navigator>
+
+    </NavigationContainer>
   );
 }
 

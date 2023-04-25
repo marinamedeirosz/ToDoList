@@ -1,15 +1,11 @@
 import { View, StyleSheet, Image, Text, TouchableOpacity, Touchable} from "react-native";
-import Joguito from '../componentes/JogoDaMemoria'
 
-export default function TelaPrincipal() {
+export default function TelaPrincipal({navigation}) {
   return (
     <View style={styles.container}>
         <View style={styles.titlesView}>
-            <Text style={styles.titleText}>Jogo da memória</Text>
-            <Text style={styles.subtitleText}>(versão marimari e biazinha)</Text>
-        </View>
-        <View style={styles.jogoView}>
-            <Joguito/>
+            <Text style={styles.titleText}>Jogo das (nossas) memórias</Text>
+            <Text style={styles.subtitleText}>versão marimari e baebae</Text>
         </View>
     </View>
   );
@@ -29,19 +25,12 @@ const styles = StyleSheet.create({
     },
     titleText: {
         margin: 20,
-        fontSize: '45px',
+        fontSize: '40px',
         fontFamily: 'SigmarOne',
     },
     subtitleText: {
         margin: 20,
-        fontSize: '20px',
+        fontSize: '15px',
         fontFamily: 'SigmarOne',
-    },
-    jogoView: {
-        borderRadius: 20,
-        backgroundColor: 'purple',
-        height: '70%',
-        marginLeft: 10,
-        marginRight: 10
     }
 })
