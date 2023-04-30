@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {StyleSheet, TouchableOpacity, View, ImageBackground} from "react-native";
+import { StyleSheet, TouchableOpacity, View, ImageBackground } from "react-native";
 import interrogacao from "../../assets/game_images/interrogacao.png";
 import dedito from "../../assets/game_images/deditos.jpg";
 import allstar from "../../assets/game_images/allstar.png";
@@ -14,7 +14,7 @@ import bjbj from "../../assets/game_images/beijinho.jpg";
 
 var cartas = [];
 
-export default function App({navigation}) {
+export default function App({ navigation }) {
   const [board, setBoard] = useState([
     { status: 0, image: dedito, id: 0 },
     { status: 0, image: allstar, id: 1 },
@@ -72,15 +72,15 @@ export default function App({navigation}) {
 
   return (
     <View style={styles.container}>
-      {board.map((card, index) => (
+      {board.map((card, index, id) => (
         <View style={styles.cartita}>
-          <TouchableOpacity key={card.id} onPress={() => openCard(card, index)}>
+          <TouchableOpacity key={id} onPress={() => openCard(card, index)}>
             <View style={styles.card}>
               <ImageBackground
                 source={card.status === 0 ? interrogacao : card.image}
-                resizeMode="stretch"
+                resizeMode="cover"
                 style={styles.image}
-                imageStyle={{ borderRadius: 10}}
+                imageStyle={{ borderRadius: 10 }}
               ></ImageBackground>
             </View>
           </TouchableOpacity>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   },
-  cartita:{
+  cartita: {
     width: '21%',
     alignItems: 'center',
     justifyContent: 'center'

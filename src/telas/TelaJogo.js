@@ -1,19 +1,19 @@
-import { View, StyleSheet, Image, Text, TouchableOpacity, Touchable} from "react-native";
+import { View, StyleSheet } from "react-native";
 import Joguito from '../componentes/JogoDaMemoria'
 
-export default function TelaPrincipal({navigation}) {
+export default function TelaPrincipal({ navigation }) {
   return (
     <View style={styles.container}>
-        <Joguito/>
+      <Joguito />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'pink',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+  container: {
+    flex: 1,
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 })

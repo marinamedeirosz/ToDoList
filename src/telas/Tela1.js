@@ -1,8 +1,78 @@
-import TelaInicial from './TelaInicial';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 
-export default function Tela1({navigation}) {
+export default function Tela1({ navigation }) {
   return (
-    <TelaInicial texto='Preparada?' nav=''></TelaInicial>
-  );
+    <View style={styles.container}>
+      <View style={styles.fundo}>
+        <Text style={styles.titulo}>Preparada?</Text>
+        <View style={styles.botoesSimView}>
+          <TouchableOpacity style={styles.botaoSim} onPress={() =>
+            navigation.navigate('T2')}>
+            <Text style={styles.textoBotaoSim}>SIM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botaoSim} onPress={() =>
+            navigation.navigate('T2')}>
+            <Text style={styles.textoBotaoSim}>SIM PT.2</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.botaoNao}>
+          <Text style={styles.textoBotaoNao}>NÃO</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fundo: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  botoesSimView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '70%',
+    margin: 20
+  },
+  botaoSim: {
+    borderRadius: '50%',
+    height: 100,
+    width: 100,
+    backgroundColor: 'green',
+    margin: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  titulo: {
+    margin: 20,
+    fontSize: '45px',
+    fontFamily: 'SigmarOne',
+    marginBottom: 50
+  },
+  textoBotaoSim: {
+    fontSize: '20px',
+    fontFamily: 'SigmarOne',
+    textAlign: 'center'
+  },
+  botaoNao: {
+    borderRadius: 10,
+    height: 25,
+    width: 50,
+    backgroundColor: 'red',
+    margin: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50
+  },
+  textoBotaoNao: {
+    fontSize: '12px',
+    fontFamily: 'SigmarOne',
+    textAlign: 'center'
+  }
+})

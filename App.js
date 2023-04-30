@@ -4,8 +4,10 @@ import TelaCarregamento from './src/telas/TelaCarregamento';
 import TelaPrincipal from './src/telas/TelaPrincipal';
 import { useFonts } from 'expo-font';
 import TelaJogo from './src/telas/TelaJogo'
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,14 +21,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="T1" component={Tela1}/>
-        <Stack.Screen name="T2" component={Tela2}/>
-        <Stack.Screen name="Loading" component={TelaCarregamento}/>
-        <Stack.Screen name="Home" component={TelaPrincipal}/>
-        <Stack.Screen name="Game" component={TelaJogo}/>
+        <Stack.Screen name="T1" component={Tela1} options={{ headerShown: false }} />
+        <Stack.Screen name="T2" component={Tela2} options={{ headerShown: false }} />
+        <Stack.Screen name="Loading" component={TelaCarregamento} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={TelaPrincipal} options={{ headerShown: false }} />
+        <Stack.Screen name="Game" component={TelaJogo} options={{ title: 'Joguito5' }} />
       </Stack.Navigator>
-
     </NavigationContainer>
   );
 }
-
