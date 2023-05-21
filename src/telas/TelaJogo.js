@@ -4,7 +4,7 @@ import Joguito from '../componentes/JogoDaMemoria'
 export default function TelaPrincipal({ navigation }) {
   return (
     <View style={styles.container}>
-      <Joguito />
+      <Joguito/>
     </View>
   );
 }
