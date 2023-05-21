@@ -1,6 +1,6 @@
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-//import CaixaTexto from '../componentes/MyTextInput'
-import { TextInput } from "react-native";
+import { TextInput, View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import CaixaTexto from '../componentes/MyTextInput'
+import { useState } from 'react';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -9,17 +9,15 @@ export default function Login({ navigation }) {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
+                <CaixaTexto
                     autoCapitalize="none"
                     placeholderTextColor="#727272"
                     placeholder='email'
                     value={email}
                     onChangeText={setEmail} />
-                <TextInput
+                <CaixaTexto
                     autoCapitalize="none"
                     placeholderTextColor="#727272"
-                    style={styles.input}
                     placeholder='senha'
                     secureTextEntry
                     value={password}
@@ -41,15 +39,5 @@ const styles = StyleSheet.create({
         width: '33%',
         height: '10%',
         backgroundColor: 'lightblue'
-    },
-    input: {
-        borderRadius: 8,
-        borderColor: '#1D013F',
-        paddingHorizontal: 8,
-        color: '#000',
-        borderWidth: 1,
-        width: '100%',
-        height: 50,
-        marginBottom: 16,
     }
 })
