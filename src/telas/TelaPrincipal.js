@@ -4,12 +4,12 @@ export default function TelaPrincipal({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.titlesView}>
-                <Text style={styles.titleText}>Jogo das (nossas) memórias</Text>
-                <Text style={styles.subtitleText}>versão marimari e baebae</Text>
+                <Text style={styles.titleText}>Jogo da memória</Text>
             </View>
             <View>
                 <TouchableOpacity style={styles.btnJogo} onPress={() =>
                     navigation.navigate('Game')}>
+                        <Text style={styles.btnText}>Jogar</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -33,15 +33,15 @@ const styles = StyleSheet.create({
         fontSize: '40px',
         fontFamily: 'SigmarOne',
     },
-    subtitleText: {
+    btnText: {
         margin: 20,
-        fontSize: '15px',
+        fontSize: '20px',
         fontFamily: 'SigmarOne',
     },
     btnJogo: {
         borderRadius: '50%',
-        height: 50,
-        width: 50,
+        height: '20%rem',
+        width: '33%rem',
         backgroundColor: 'green',
         margin: 2,
         justifyContent: 'center',

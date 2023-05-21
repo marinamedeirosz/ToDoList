@@ -1,29 +1,48 @@
-import { TextInput, View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { TextInput, View, Text,  StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import CaixaTexto from '../componentes/MyTextInput'
 import { useState } from 'react';
+import auth from '../../firebase';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleSignUp = () => {
+        auth
+            .createUerWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log(user.email)
+            })
+            .catch(error => alert(error.message))
+    }
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <CaixaTexto
-                    autoCapitalize="none"
-                    placeholderTextColor="#727272"
-                    placeholder='email'
-                    value={email}
-                    onChangeText={setEmail} />
-                <CaixaTexto
-                    autoCapitalize="none"
-                    placeholderTextColor="#727272"
-                    placeholder='senha'
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword} />
-                <TouchableOpacity style={styles.botao} onPress={() =>
-                    navigation.navigate('Home')}>Entrar no App</TouchableOpacity>
+                <View style={styles.inputView}>
+                    <CaixaTexto
+                        autoCapitalize="none"
+                        placeholderTextColor="#727272"
+                        placeholder='email'
+                        value={email}
+                        onChangeText={setEmail} />
+                    <CaixaTexto
+                        autoCapitalize="none"
+                        placeholderTextColor="#727272"
+                        placeholder='senha'
+                        secureTextEntry
+                        value={password}
+                        onChangeText={setPassword} />
+                </View>
+                <View style={styles.btnView}>
+                    <TouchableOpacity style={styles.botao} onPress={() => {}}>
+                            <Text style={styles.botaoText}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.botao, styles.botaoOutline]} onPress={handleSignUp}>
+                            <Text style={styles.botaoOutlineText}>Register</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -35,9 +54,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    inputView:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80%'
+    },
+    btnView:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        wifth: '60%',
+        marginTop: 40
+    },
     botao: {
-        width: '33%',
-        height: '10%',
-        backgroundColor: 'lightblue'
+        width: '100%',
+        backgroundColor: '#575c5e',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 15
+    },
+    botaoOutline: {
+        backgroundColor: 'white',
+        marginTop: 5,
+        borderColor: '#575c5e',
+        borderWidth: 2
+    },
+    botaoText: {
+        color: 'white',
+        fontWeight: '700',
+        fontSize: 16
+    },
+    botaoOutlineText: {
+        color: '#575c5e',
+        fontWeight: '700',
+        fontSize: 16
     }
 })
