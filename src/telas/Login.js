@@ -1,7 +1,7 @@
 import { TextInput, View, Text,  StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import CaixaTexto from '../componentes/MyTextInput'
 import { useState } from 'react';
-import auth from '../../firebase';
+import {auth} from '../../firebase'
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
