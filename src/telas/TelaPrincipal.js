@@ -25,6 +25,10 @@ export default function TelaPrincipal({ navigation }) {
                         <Text style={styles.btnText}>SignOut</Text>
                 </TouchableOpacity>
             </View>
+            <TouchableOpacity style={[styles.btnJogo, {backgroundColor: 'yellow'}]} onPress={() => 
+                navigation.navigate("Tasks")}>
+                        <Text style={styles.btnText}>Tasks</Text>
+                </TouchableOpacity>
         </View>
     );
 }

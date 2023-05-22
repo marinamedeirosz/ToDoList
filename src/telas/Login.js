@@ -2,8 +2,6 @@ import { TextInput, View, Text,  StyleSheet, SafeAreaView, TouchableOpacity } fr
 import CaixaTexto from '../componentes/MyTextInput'
 import { useEffect, useState } from 'react';
 import { auth } from '../../firebase';
-import { useNavigation } from "@react-navigation/native";
-//import firebase from 'firebase';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
