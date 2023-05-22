@@ -118,3 +118,88 @@ const styles = StyleSheet.create({
 		margin: '10px'
 	}
 });
+
+/*
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native';
+
+export default function App() {
+  const [task, setTask] = useState('');
+  const [taskList, setTaskList] = useState([]);
+
+  const addTask = () => {
+    if (task.trim()) {
+      setTaskList([...taskList, task]);
+      setTask('');
+    }
+  };
+
+  const deleteTask = (index) => {
+    const newTaskList = [...taskList];
+    newTaskList.splice(index, 1);
+    setTaskList(newTaskList);
+  };
+
+  const renderTask = ({ item, index }) => (
+    <TouchableOpacity onPress={() => deleteTask(index)}>
+      <Text style={styles.taskItem}>{item}</Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.heading}>Lista de Tarefas</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite uma tarefa"
+        value={task}
+        onChangeText={(text) => setTask(text)}
+      />
+      <TouchableOpacity style={styles.addButton} onPress={addTask}>
+        <Text style={styles.addButtonText}>Adicionar</Text>
+      </TouchableOpacity>
+      <FlatList
+        data={taskList}
+        renderItem={renderTask}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  addButton: {
+    backgroundColor: '#2196F3',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  taskItem: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+});
+*/
