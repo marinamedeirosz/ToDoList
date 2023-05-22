@@ -1,12 +1,23 @@
 import { TextInput, View, Text,  StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import CaixaTexto from '../componentes/MyTextInput'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { auth } from '../../firebase';
+import { useNavigation } from "@react-navigation/native";
 //import firebase from 'firebase';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate('Home')
+            }
+        })
+
+        return unsubscribe
+    }, [])
 
     const handleSignUp = () => {
         auth
@@ -16,7 +27,17 @@ export default function Login({ navigation }) {
             console.log('Registered with:', user.email);
           })
           .catch(error => alert(error.message))
-      }
+    }
+
+    const handleLogin = () => {
+        auth
+        .signInWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log('Logged in with:', user.email);
+          })
+          .catch(error => alert(error.message))
+    }
 
     return (
         <SafeAreaView>
@@ -37,7 +58,7 @@ export default function Login({ navigation }) {
                         onChangeText={setPassword} />
                 </View>
                 <View style={styles.btnView}>
-                    <TouchableOpacity style={styles.botao} onPress={() => {}}>
+                    <TouchableOpacity style={styles.botao} onPress={(handleLogin)}>
                             <Text style={styles.botaoText}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.botao, styles.botaoOutline]} onPress={handleSignUp}>
@@ -63,7 +84,7 @@ const styles = StyleSheet.create({
     btnView:{
         alignItems: 'center',
         justifyContent: 'center',
-        wifth: '60%',
+        width: '60%',
         marginTop: 40
     },
     botao: {

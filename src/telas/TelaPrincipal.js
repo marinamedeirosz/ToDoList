@@ -1,15 +1,28 @@
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { auth } from '../../firebase';
 
 export default function TelaPrincipal({ navigation }) {
+    const handleSignOut = () => {
+        auth
+        .signOut()
+        .then(() => {
+            navigation.replace("Login")
+        })
+        .catch(error => alert(error.message))
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.titlesView}>
                 <Text style={styles.titleText}>Jogo da memória</Text>
             </View>
-            <View>
+            <View style={styles.btnView}>
                 <TouchableOpacity style={styles.btnJogo} onPress={() =>
                     navigation.navigate('Game')}>
                         <Text style={styles.btnText}>Jogar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.btnJogo, {backgroundColor: 'red'}]} onPress={handleSignOut}>
+                        <Text style={styles.btnText}>SignOut</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -35,16 +48,22 @@ const styles = StyleSheet.create({
     },
     btnText: {
         margin: 20,
-        fontSize: '20px',
+        fontSize: '15px',
         fontFamily: 'SigmarOne',
     },
     btnJogo: {
-        borderRadius: '50%',
-        height: '20%rem',
-        width: '33%rem',
+        borderRadius: 20,
+        width: '50%',
         backgroundColor: 'green',
         margin: 2,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    btnView:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '60%',
+        marginTop: 40
     }
 })

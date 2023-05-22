@@ -21,7 +21,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={TelaPrincipal} options={{ headerShown: false }} />
-        <Stack.Screen name="Game" component={TelaJogo} options={{ title: 'Joguito5' }} />
+        <Stack.Screen name="Game" component={TelaJogo} options={{ title: 'Jogo da memória'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
