@@ -1,7 +1,8 @@
 import { TextInput, View, Text,  StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import CaixaTexto from '../componentes/MyTextInput'
 import { useState } from 'react';
-import {auth} from '../../firebase'
+import { auth } from '../../firebase';
+//import firebase from 'firebase';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -9,13 +10,13 @@ export default function Login({ navigation }) {
 
     const handleSignUp = () => {
         auth
-            .createUerWithEmailAndPassword(email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user;
-                console.log(user.email)
-            })
-            .catch(error => alert(error.message))
-    }
+          .createUserWithEmailAndPassword(email, password)
+          .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log('Registered with:', user.email);
+          })
+          .catch(error => alert(error.message))
+      }
 
     return (
         <SafeAreaView>
