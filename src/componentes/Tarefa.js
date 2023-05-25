@@ -1,11 +1,13 @@
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { CheckBox } from 'react-native-elements';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageBackground } from "react-native";
 import close from "../../assets/task_images/close.png";
 
-export default function Tarefa({nome, func}) {
-    const [checked, setChecked] = useState(false);
+
+
+export default function Tarefa({nome, func, status, checkedFunc}) {
+    const [checked, setChecked] = useState(status);
 
     return (
         <View style={styles.tarefaView}>
@@ -16,7 +18,7 @@ export default function Tarefa({nome, func}) {
             checkedColor="green"
             uncheckedColor="red"
             checked={checked}
-            onPress={() => setChecked(!checked)}></CheckBox>
+            onPress={()=>{checkedFunc(); setChecked(!status)}}></CheckBox>
             <Text style={[styles.uncheckedText, checked? styles.checkedText : null]}>{nome}</Text>
             <TouchableOpacity onPress={func}>
                 <View style={styles.apagar}>

@@ -1,25 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, TouchableOpacity,  Text, TextInput, View, SafeAreaView, Image } from 'react-native';
 import Tarefa from '../componentes/Tarefa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import add from '../../assets/task_images/add.png'
+import {createTask, updateTask, deleteTask, getTasks} from "../services/userServices";
+import {auth} from "../../firebase"
 
 export default function Tarefas({navigation}) {
 	const [tarefas, setTarefas] = useState([])
 	const [nome, setNome] = useState("")
+	const [refresh, setRefresh] = useState(false)
+	
+	useEffect(() => {
+		getTasks(auth.currentUser).then((userTasks) => {
+			setTarefas(userTasks);
+		});
+	}, [refresh])
 
-	const adicionaTarefa = (nome) => {
+
+
+	const adicionaTarefa = async (nome) => {
 		if (nome === '') return
     	else {
-			setTarefas(tarefas => [...tarefas, {'desc': nome}])
-			setNome('')
+			await createTask(nome, auth.currentUser);
+			setRefresh(!refresh);
 		}
 	}
 
-	const removeTarefa = (id) => {        
-		const deleted = [...tarefas];
-		deleted.splice(id, 1);
-		setTarefas(deleted);
+
+	const removeTarefa = async (id) => {        
+		await deleteTask(id)
+		setRefresh(!refresh)
+	}
+
+	const updateTaskStatus = async (id, status) => {
+		await updateTask(id, !status)
+		setRefresh(!refresh)
 	}
 
 	return (
@@ -52,7 +68,10 @@ export default function Tarefas({navigation}) {
 				</View>
 				<View style={styles.viewTarefas}>
 					{tarefas.map((t, i) => (
-					<Tarefa nome={t.desc} id={t.id} func={() => removeTarefa(i)}></Tarefa>
+					<Tarefa nome={t.titulo} status={t.status} id={i} key={i} 
+					func={() => removeTarefa(t.id)}
+					checkedFunc={() => updateTaskStatus(t.id, t.status)}
+					></Tarefa>
 					))}
 				</View>
 			</View>
