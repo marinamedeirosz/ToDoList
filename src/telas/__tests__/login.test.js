@@ -1,11 +1,11 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import Login from '../Login';
+const React = require('react');
+const { render, fireEvent } = require('@testing-library/react-native');
+const Login = require('../Login');
 
 describe('Login', () => {
-    test('chama handleSignUp corretamente ao pressionar o botão de registro', () => {
+    test('chama handleSignUp ao pressionar o botão de registro', () => {
         const handleSignUpMock = jest.fn();
-        const { getByText } = render(<Login handleSignUp={handleSignUpMock} />);
+        const { getByText } = render(Login({ handleSignUp: handleSignUpMock }));
         const registerButton = getByText('Register');
 
         fireEvent.press(registerButton);
@@ -15,7 +15,7 @@ describe('Login', () => {
 
     test('chama handleLogin corretamente ao pressionar o botão de login', () => {
         const handleLoginMock = jest.fn();
-        const { getByText, getByPlaceholderText } = render(<Login handleLogin={handleLoginMock} />);
+        const { getByText, getByPlaceholderText } = render(Login({ handleLogin: handleLoginMock }));
         const loginButton = getByText('Login');
         const emailInput = getByPlaceholderText('email');
         const passwordInput = getByPlaceholderText('senha');
