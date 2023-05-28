@@ -1,34 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, TouchableOpacity,  Text, TextInput, View, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, ImageBackground, TouchableOpacity, Text, TextInput, View, SafeAreaView, Image } from 'react-native';
 import Tarefa from '../componentes/Tarefa';
 import { useState, useEffect } from 'react';
 import add from '../../assets/task_images/add.png'
-import {createTask, updateTask, deleteTask, getTasks} from "../services/userServices";
-import {auth} from "../../firebase"
+import { createTask, updateTask, deleteTask, getTasks } from "../services/userServices";
+import { auth } from "../../firebase"
 
-export default function Tarefas({navigation}) {
+export default function Tarefas() {
 	const [tarefas, setTarefas] = useState([])
 	const [nome, setNome] = useState("")
 	const [refresh, setRefresh] = useState(false)
-	
+
 	useEffect(() => {
 		getTasks(auth.currentUser).then((userTasks) => {
 			setTarefas(userTasks);
 		});
 	}, [refresh])
 
-
-
 	const adicionaTarefa = async (nome) => {
 		if (nome === '') return
-    	else {
+		else {
 			await createTask(nome, auth.currentUser);
 			setRefresh(!refresh);
 		}
 	}
 
-
-	const removeTarefa = async (id) => {        
+	const removeTarefa = async (id) => {
 		await deleteTask(id)
 		setRefresh(!refresh)
 	}
@@ -40,91 +37,92 @@ export default function Tarefas({navigation}) {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.viewTitulo}>
-				<Image style={styles.img} source={require('../../assets/task_images/lista.png')}></Image>
-				<Text numberOfLines={1} style={styles.text}>listinha marota</Text>
-			</View>
 			<View style={styles.total}>
-				<View style={styles.input}/*caixa de texto*/>
-					<View style={styles.inputView}>
-						<TextInput
-							style={styles.inputText}
-							value={nome}
-							onChangeText={text => setNome(text)}
-							autocapitalize="none"
-							multiline='true'
-							placeholder='Digite a tarefa: '
-						/>
-						<TouchableOpacity onPress={() => adicionaTarefa(nome)}>
-							<View style={styles.adicionarImg}>
-								<ImageBackground
-									source={add}
-									resizeMode="stretch"
-									style={styles.image}
-								></ImageBackground>
-							</View>
-						</TouchableOpacity>
-					</View>
+				<View style={styles.inputView}>
+					<Image style={styles.img} source={require('../../assets/task_images/lista.png')}></Image>
+					<TextInput
+						style={styles.inputBox}
+						value={nome}
+						onChangeText={text => setNome(text)}
+						autocapitalize="none"
+						multiline='true'
+						placeholder='Digite a tarefa: '
+					/>
+					<TouchableOpacity onPress={() => adicionaTarefa(nome)}>
+						<View style={styles.adicionarImg}>
+							<ImageBackground
+								source={add}
+								resizeMode="stretch"
+								style={styles.image}
+							></ImageBackground>
+						</View>
+					</TouchableOpacity>
 				</View>
 				<View style={styles.viewTarefas}>
 					{tarefas.map((t, i) => (
-					<Tarefa nome={t.titulo} status={t.status} id={i} key={i} 
-					func={() => removeTarefa(t.id)}
-					checkedFunc={() => updateTaskStatus(t.id, t.status)}
-					></Tarefa>
+						<Tarefa nome={t.titulo} status={t.status} id={i} key={i}
+							func={() => removeTarefa(t.id)}
+							checkedFunc={() => updateTaskStatus(t.id, t.status)}
+						></Tarefa>
 					))}
 				</View>
 			</View>
-		<StatusBar/>
+			<StatusBar />
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-    	flex: 1,
-    	alignItems: "center",
-  	},
-  	img: {
-    	height: '50px',
-    	width: '50px'
- 	},
+		flex: 1,
+		alignItems: "center",
+		backgroundColor: '#fcdcfa'
+	},
+	img: {
+		height: '50px',
+		width: '50px'
+	},
 	text: {
 		width: '70%'
 	},
- 	viewTitulo: {
-   		alignItems: 'center',
-    	flexDirection: 'row', 
-    	justifyContent: 'center',
+	viewTitulo: {
+		alignItems: 'center',
+		flexDirection: 'row',
+		justifyContent: 'center',
 		height: '10%',
 		width: '70%'
 	},
 	viewTarefas: {
 		alignItems: 'center',
-		backgroundColor: "lightpink" ,
+		backgroundColor: "#f68cee",
 		width: '100%',
 		borderRadius: '10px'
 	},
-  	total: {
-    	width: "80%",
-    	justifyContent: 'center',
-    	alignItems: 'center'
+	total: {
+		width: "80%",
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
-  	input: {
-    	width: '100%',
+	input: {
+		width: '100%',
 	},
-  	inputText: {
-    	borderWidth:1, 
-    	borderColor: '#000',
-    	borderRadius: '10px',
-    	width: "90%",
+	inputBox: {
+		width: "90%",
+		borderRadius: 8,
+		borderColor: '#1D013F',
 		paddingHorizontal: 8,
-		paddingVertical: 4
+		color: '#000',
+		borderWidth: 1,
+		width: '100%',
+		height: 50
 	},
 	inputView: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		flexDirection: "row"
+		flexDirection: "row",
+		width: '100%',
+		paddingTop: '10px',
+		paddingBottom: '10px'
 	},
 	image: {
 		flex: 1,
@@ -137,88 +135,3 @@ const styles = StyleSheet.create({
 		margin: '10px'
 	}
 });
-
-/*
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native';
-
-export default function App() {
-  const [task, setTask] = useState('');
-  const [taskList, setTaskList] = useState([]);
-
-  const addTask = () => {
-    if (task.trim()) {
-      setTaskList([...taskList, task]);
-      setTask('');
-    }
-  };
-
-  const deleteTask = (index) => {
-    const newTaskList = [...taskList];
-    newTaskList.splice(index, 1);
-    setTaskList(newTaskList);
-  };
-
-  const renderTask = ({ item, index }) => (
-    <TouchableOpacity onPress={() => deleteTask(index)}>
-      <Text style={styles.taskItem}>{item}</Text>
-    </TouchableOpacity>
-  );
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Lista de Tarefas</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Digite uma tarefa"
-        value={task}
-        onChangeText={(text) => setTask(text)}
-      />
-      <TouchableOpacity style={styles.addButton} onPress={addTask}>
-        <Text style={styles.addButtonText}>Adicionar</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={taskList}
-        renderItem={renderTask}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  addButton: {
-    backgroundColor: '#2196F3',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  addButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  taskItem: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-});
-*/

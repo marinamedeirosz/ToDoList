@@ -1,34 +1,34 @@
-import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { auth } from '../../firebase';
 
 export default function TelaPrincipal({ navigation }) {
     const handleSignOut = () => {
         auth
-        .signOut()
-        .then(() => {
-            navigation.replace("Login")
-        })
-        .catch(error => alert(error.message))
+            .signOut()
+            .then(() => {
+                navigation.replace("Login")
+            })
+            .catch(error => alert(error.message))
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.titlesView}>
-                <Text style={styles.titleText}>Jogo da memória</Text>
+                <Text style={styles.titleText}>To Do List</Text>
             </View>
             <View style={styles.btnView}>
-                <TouchableOpacity style={styles.btnJogo} onPress={() =>
-                    navigation.navigate('Game')}>
-                        <Text style={styles.btnText}>Jogar</Text>
+                <TouchableOpacity style={[styles.btnJogo, { backgroundColor: '#894fc9' }]} onPress={() =>
+                    navigation.navigate("Tasks")}>
+                    <Text style={styles.btnText}>Tasks</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.btnJogo, {backgroundColor: 'red'}]} onPress={handleSignOut}>
-                        <Text style={styles.btnText}>SignOut</Text>
+                <TouchableOpacity style={[styles.btnJogo, { backgroundColor: '#fd033d' }]} onPress={handleSignOut}>
+                    <Text style={styles.btnText}>SignOut</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={[styles.btnJogo, {backgroundColor: 'yellow'}]} onPress={() => 
-                navigation.navigate("Tasks")}>
-                        <Text style={styles.btnText}>Tasks</Text>
-                </TouchableOpacity>
+            {/* <TouchableOpacity style={styles.btnJogo} onPress={() =>
+                    navigation.navigate('Game')}>
+                        <Text style={styles.btnText}>Jogar</Text>
+            </TouchableOpacity> */}
         </View>
     );
 }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    btnView:{
+    btnView: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
